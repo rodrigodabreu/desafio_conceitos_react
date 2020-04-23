@@ -25,25 +25,37 @@ function App() {
   }
 
   async function handleRemoveRepository(id) {
-    const response = await api.get("repositories").then((response) => {
-      const { repositories } = response.data;
-      console.log(response.data);
-      console.log(repositories);
-    });
+    //TODO:
+    /**
+     *
+     *Remover um repositório da sua API: Para cada item da sua lista,
+     * deve possuir um botão com o texto Remover que, ao clicar, irá chamar uma
+     * função para remover esse item da lista do seu frontend e da sua API.
+     */
+    // Chama o endpoint DELETE
+    await api.delete(`repositories/${id}`);
+
+    // Cria um novo array de repositories excluindo o repository que possue valor
+    // id igual ao informado
+    // O método filter() cria um novo array com todos os elementos que passaram no teste implementado pela função fornecida.
+    const newListOfRepositories = repositories.filter(
+      (repository) => repository.id !== id
+    );
+    setRepositories(newListOfRepositories);
   }
 
   return (
     <div>
       <ul data-testid="repository-list">
         {repositories.map((repository) => (
-          <li key={repository.id}>{repository.title}</li>
+          <li key={repository.id}>
+            {repository.title}
+            <button onClick={() => handleRemoveRepository(repository.id)}>
+              Remover
+            </button>
+          </li>
         ))}
-        <li>
-          Repositório 1
-          <button onClick={() => handleRemoveRepository(1)}>Remover</button>
-        </li>
       </ul>
-
       <button onClick={handleAddRepository}>Adicionar</button>
     </div>
   );
