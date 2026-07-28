@@ -33,6 +33,6 @@
     "@testing-library/user-event": "^7.1.2"
   },
   "resolutions": {
-    "js-yaml": "^5.2.2"
+    "js-yaml": "3.15.0"
   }
 }
